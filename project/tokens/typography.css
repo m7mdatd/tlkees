@@ -1,0 +1,62 @@
+/* ============================================================
+   منصة تلخيص — Typography tokens
+   Family: IBM Plex Sans Arabic. Mono: IBM Plex Mono.
+   The product is Arabic-first and RTL; type scale is sized for dense,
+   formal reading (summaries, correspondence) plus a confident display tier.
+   ============================================================ */
+
+:root {
+  /* ---- Families ---- */
+  --font-sans: "IBM Plex Sans Arabic", "Segoe UI", system-ui, sans-serif;
+  --font-display: "IBM Plex Sans Arabic", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  /* ---- Weights ---- */
+  --fw-light:    300; /* @kind font */
+  --fw-regular:  400; /* @kind font */
+  --fw-medium:   500; /* @kind font */
+  --fw-semibold: 600; /* @kind font */
+  --fw-bold:     700; /* @kind font */
+
+  /* ---- Type scale (px) ---- */
+  --fs-display:  56px;
+  --fs-h1:       40px;
+  --fs-h2:       32px;
+  --fs-h3:       25px;
+  --fs-h4:       20px;
+  --fs-lead:     18px;
+  --fs-body:     16px;
+  --fs-sm:       14px;
+  --fs-xs:       13px;
+  --fs-2xs:      12px;
+
+  /* ---- Line heights ---- */
+  --lh-tight:   1.15; /* @kind font */
+  --lh-snug:    1.35; /* @kind font */
+  --lh-normal:  1.6;  /* @kind font */ /* Arabic body reads best a touch looser */
+  --lh-relaxed: 1.8;  /* @kind font */
+
+  /* ---- Letter spacing (Arabic ignores most; used for Latin/labels) ---- */
+  --ls-tight:  -0.02em; /* @kind font */
+  --ls-normal:  0;       /* @kind font */
+  --ls-wide:    0.04em;  /* @kind font */
+
+  /* ---- Semantic roles ---- */
+  --text-display-size: var(--fs-display);
+  --text-display-weight: var(--fw-bold);
+  --text-display-lh: var(--lh-tight);
+
+  --text-h1-size: var(--fs-h1);
+  --text-h1-weight: var(--fw-bold);
+  --text-h2-size: var(--fs-h2);
+  --text-h2-weight: var(--fw-semibold);
+  --text-h3-size: var(--fs-h3);
+  --text-h3-weight: var(--fw-semibold);
+
+  --text-body-size: var(--fs-body);
+  --text-body-weight: var(--fw-regular);
+  --text-body-lh: var(--lh-normal);
+
+  --text-label-size: var(--fs-sm);
+  --text-label-weight: var(--fw-medium);
+}

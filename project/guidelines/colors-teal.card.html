@@ -1,0 +1,21 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Turquoise · الفيروزي" subtitle="Accent scale — clarity & the single hero action" -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body{margin:0;padding:18px;background:var(--surface-card);}
+  .scale{display:grid;grid-template-columns:repeat(10,1fr);gap:6px;}
+  .sw{height:64px;border-radius:var(--radius-sm);display:flex;align-items:flex-end;padding:6px;font-family:var(--font-mono);font-size:10px;}
+  .v{font-family:var(--font-mono);font-size:9px;color:var(--text-subtle);text-align:center;margin-top:2px;}
+</style></head>
+<body>
+<div class="scale" id="s"></div>
+<script>
+const steps=[["900","#0A4E4A"],["800","#0C6661"],["700","#0F8079"],["600","#129B92"],["500","#14ABA1"],["400","#2FC0B6"],["300","#63D2CA"],["200","#9DE3DD"],["100","#CCF0ED"],["50","#E8F8F6"]];
+document.getElementById("s").innerHTML=steps.map(([k,v])=>{
+  const dark=parseInt(k)>=400;
+  const star=k==="500"?" ●":"";
+  return `<div><div class="sw" style="background:var(--teal-${k});color:${dark?'#fff':'#0A4E4A'}">${k}${star}</div><div class="v">${v}</div></div>`;
+}).join("");
+</script>
+</body></html>

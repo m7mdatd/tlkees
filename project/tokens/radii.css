@@ -1,0 +1,19 @@
+/* ============================================================
+   منصة تلخيص — Radius tokens
+   Calm, professional rounding — never pill-shaped except chips/avatars.
+   ============================================================ */
+
+:root {
+  --radius-xs:   4px;
+  --radius-sm:   6px;
+  --radius-md:   10px;  /* default for controls & cards */
+  --radius-lg:   14px;
+  --radius-xl:   20px;
+  --radius-2xl:  28px;
+  --radius-pill: 999px;
+  --radius-circle: 50%;
+
+  --radius-control: var(--radius-md);
+  --radius-card:    var(--radius-lg);
+  --radius-field:   var(--radius-md);
+}

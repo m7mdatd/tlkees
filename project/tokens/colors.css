@@ -1,0 +1,98 @@
+/* ============================================================
+   منصة تلخيص — Color tokens
+   Navy (الكحلي) = trust / formality.  Turquoise (الفيروزي) = clarity / action.
+   ============================================================ */
+
+:root {
+  /* ---- Navy · الكحلي ---- */
+  --navy-950: #061629;
+  --navy-900: #0A2138;
+  --navy-800: #0E2C4A; /* brand primary */
+  --navy-700: #163A5F;
+  --navy-600: #214E7B;
+  --navy-500: #2F6498;
+  --navy-400: #5384B5;
+  --navy-300: #8AAACB;
+  --navy-200: #BBCEE2;
+  --navy-100: #DCE6F1;
+  --navy-50:  #EEF3F9;
+
+  /* ---- Turquoise · الفيروزي ---- */
+  --teal-900: #0A4E4A;
+  --teal-800: #0C6661;
+  --teal-700: #0F8079;
+  --teal-600: #129B92;
+  --teal-500: #14ABA1; /* brand accent */
+  --teal-400: #2FC0B6;
+  --teal-300: #63D2CA;
+  --teal-200: #9DE3DD;
+  --teal-100: #CCF0ED;
+  --teal-50:  #E8F8F6;
+
+  /* ---- Neutral · cool gray, faintly navy-tinted ---- */
+  --gray-950: #0B1118;
+  --gray-900: #141C26;
+  --gray-800: #1F2A37;
+  --gray-700: #344251;
+  --gray-600: #4B5B6B;
+  --gray-500: #677687;
+  --gray-400: #8A98A8;
+  --gray-300: #B4BFCB;
+  --gray-200: #D6DEE6;
+  --gray-100: #E9EEF3;
+  --gray-50:  #F5F8FA;
+  --white:    #FFFFFF;
+  --black:    #050A0F;
+
+  /* ---- Status ---- */
+  --success-600: #15875A;
+  --success-500: #1E9E6A;
+  --success-100: #D7F0E4;
+  --warning-600: #B9721A;
+  --warning-500: #D98A1F;
+  --warning-100: #FBEBCF;
+  --danger-600:  #BE3535;
+  --danger-500:  #D64545;
+  --danger-100:  #F8DBDB;
+  --info-500:    var(--teal-500);
+  --info-100:    var(--teal-100);
+
+  /* ============================================================
+     Semantic aliases — reference these in components, not the raw scale
+     ============================================================ */
+
+  /* Brand */
+  --brand-primary:        var(--navy-800);
+  --brand-primary-hover:  var(--navy-700);
+  --brand-primary-active: var(--navy-900);
+  --brand-accent:         var(--teal-500);
+  --brand-accent-hover:   var(--teal-600);
+  --brand-accent-active:  var(--teal-700);
+
+  /* Surfaces */
+  --surface-page:    var(--gray-50);
+  --surface-card:    var(--white);
+  --surface-sunken:  var(--gray-100);
+  --surface-inverse: var(--navy-800);
+  --surface-accent-subtle: var(--teal-50);
+  --surface-brand-subtle:  var(--navy-50);
+
+  /* Text */
+  --text-strong:   var(--navy-900);
+  --text-body:     var(--gray-800);
+  --text-muted:    var(--gray-500);
+  --text-subtle:   var(--gray-400);
+  --text-inverse:  var(--white);
+  --text-accent:   var(--teal-700);
+  --text-link:     var(--navy-600);
+
+  /* Borders */
+  --border-subtle:  var(--gray-200);
+  --border-default: var(--gray-300);
+  --border-strong:  var(--gray-400);
+  --border-accent:  var(--teal-500);
+  --border-focus:   var(--teal-500);
+
+  /* Focus ring */
+  --ring: 0 0 0 3px color-mix(in srgb, var(--teal-500) 35%, transparent);
+}

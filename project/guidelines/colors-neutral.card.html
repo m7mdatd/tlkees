@@ -1,0 +1,22 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Neutrals" subtitle="Cool gray, faintly navy-tinted — text, borders, surfaces" -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body{margin:0;padding:18px;background:var(--surface-card);}
+  .scale{display:grid;grid-template-columns:repeat(12,1fr);gap:6px;}
+  .sw{height:64px;border-radius:var(--radius-sm);display:flex;align-items:flex-end;padding:6px;font-family:var(--font-mono);font-size:10px;border:1px solid var(--border-subtle);}
+  .v{font-family:var(--font-mono);font-size:9px;color:var(--text-subtle);text-align:center;margin-top:2px;}
+</style></head>
+<body>
+<div class="scale" id="s"></div>
+<script>
+const steps=[["950","#0B1118"],["900","#141C26"],["800","#1F2A37"],["700","#344251"],["600","#4B5B6B"],["500","#677687"],["400","#8A98A8"],["300","#B4BFCB"],["200","#D6DEE6"],["100","#E9EEF3"],["50","#F5F8FA"]];
+let html=steps.map(([k,v])=>{
+  const dark=parseInt(k)>=500;
+  return `<div><div class="sw" style="background:var(--gray-${k});color:${dark?'#fff':'#1F2A37'}">${k}</div><div class="v">${v}</div></div>`;
+}).join("");
+html+=`<div><div class="sw" style="background:var(--white);color:#1F2A37">white</div><div class="v">#FFFFFF</div></div>`;
+document.getElementById("s").innerHTML=html;
+</script>
+</body></html>

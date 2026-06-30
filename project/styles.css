@@ -1,0 +1,13 @@
+/* ============================================================
+   منصة تلخيص — Design System
+   Global entry point. Consumers link THIS file only.
+   Keep this file as @import lines exclusively.
+   ============================================================ */
+
+@import "tokens/fonts.css";
+@import "tokens/colors.css";
+@import "tokens/typography.css";
+@import "tokens/spacing.css";
+@import "tokens/radii.css";
+@import "tokens/shadows.css";
+@import "tokens/base.css";

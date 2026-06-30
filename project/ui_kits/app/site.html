@@ -1,0 +1,76 @@
+<!-- @dsCard group="App" viewport="1320x860" name="منصة تلخيص — التدفّق الكامل" subtitle="هبوط ← تسجيل/دخول ← لوحة العضو ← لوحة المسؤول" -->
+<!-- @startingPoint section="App" subtitle="منصة تلخيص full flow — landing, auth, member & admin dashboards" viewport="1320x860" -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>منصة تلخيص — التدفّق</title>
+<link rel="stylesheet" href="../../styles.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<style>
+  html, body { height: 100%; margin: 0; }
+  #app { height: 100vh; }
+</style>
+</head>
+<body>
+<div id="app"></div>
+<script type="text/babel" src="icons.jsx" data-presets="react"></script>
+<script type="text/babel" src="AppShell.jsx" data-presets="react"></script>
+<script type="text/babel" src="EditorScreen.jsx" data-presets="react"></script>
+<script type="text/babel" src="LibraryScreen.jsx" data-presets="react"></script>
+<script type="text/babel" src="LandingScreen.jsx" data-presets="react"></script>
+<script type="text/babel" src="AuthScreen.jsx" data-presets="react"></script>
+<script type="text/babel" src="MemberDashboard.jsx" data-presets="react"></script>
+<script type="text/babel" src="AdminDashboard.jsx" data-presets="react"></script>
+<script type="text/babel" data-presets="react">
+function App() {
+  const [view, setView] = React.useState("landing");      // landing | login | register | member | admin
+  const [tab, setTab] = React.useState("home");            // member sub-nav
+
+  if (view === "landing")
+    return <LandingScreen onLogin={() => setView("login")} onRegister={() => setView("register")} />;
+
+  if (view === "login" || view === "register")
+    return <AuthScreen mode={view}
+      onAuth={() => { setTab("home"); setView("member"); }}
+      onAdmin={() => setView("admin")}
+      onBack={() => setView("landing")} />;
+
+  if (view === "admin")
+    return <AdminDashboard onLogout={() => setView("landing")} />;
+
+  // member workspace
+  return (
+    <AppShell active={tab} onNavigate={setTab} onLogout={() => setView("landing")}>
+      {tab === "home" && <MemberDashboard onNavigate={setTab} />}
+      {tab === "editor" && <EditorScreen />}
+      {tab === "library" && <LibraryScreen />}
+      {(tab === "templates" || tab === "settings") && <Placeholder title={tab === "templates" ? "القوالب" : "الإعدادات"} />}
+    </AppShell>
+  );
+}
+
+function Placeholder({ title }) {
+  const { Card } = window.DesignSystem_4df9a0;
+  return (
+    <div style={{ padding: "40px", display: "flex", justifyContent: "center" }}>
+      <Card elevation="sm" style={{ maxWidth: "440px", textAlign: "center", padding: "40px" }}>
+        <div style={{ width: "52px", height: "52px", borderRadius: "var(--radius-lg)", margin: "0 auto 16px",
+          background: "var(--surface-brand-subtle)", display: "flex", alignItems: "center", justifyContent: "center" }}>
+          <Icon name="layout-template" size={24} color="var(--navy-600)" />
+        </div>
+        <h2 style={{ fontSize: "var(--fs-h4)", color: "var(--text-strong)", marginBottom: "8px" }}>{title}</h2>
+        <p style={{ fontSize: "var(--fs-sm)", color: "var(--text-muted)" }}>هذه الشاشة جزء من نظام التصميم — المحتوى توضيحي.</p>
+      </Card>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("app")).render(<App />);
+</script>
+</body>
+</html>

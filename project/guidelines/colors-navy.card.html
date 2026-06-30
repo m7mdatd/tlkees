@@ -1,0 +1,22 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Navy · الكحلي" subtitle="Primary brand scale — trust & formality" -->
+<!DOCTYPE html>
+<html lang="ar" dir="rtl"><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../styles.css" />
+<style>
+  body{margin:0;padding:18px;background:var(--surface-card);}
+  .scale{display:grid;grid-template-columns:repeat(11,1fr);gap:6px;}
+  .sw{height:64px;border-radius:var(--radius-sm);display:flex;align-items:flex-end;padding:6px;font-family:var(--font-mono);font-size:10px;}
+  .cap{margin-top:6px;font-family:var(--font-mono);font-size:10px;color:var(--text-muted);text-align:center;}
+  .cell .v{font-family:var(--font-mono);font-size:9px;color:var(--text-subtle);text-align:center;margin-top:2px;}
+</style></head>
+<body>
+<div class="scale" id="s"></div>
+<script>
+const steps=[["950","#061629"],["900","#0A2138"],["800","#0E2C4A"],["700","#163A5F"],["600","#214E7B"],["500","#2F6498"],["400","#5384B5"],["300","#8AAACB"],["200","#BBCEE2"],["100","#DCE6F1"],["50","#EEF3F9"]];
+document.getElementById("s").innerHTML=steps.map(([k,v])=>{
+  const dark=parseInt(k)>=400;
+  const star=k==="800"?" ●":"";
+  return `<div class="cell"><div class="sw" style="background:var(--navy-${k});color:${dark?'#fff':'#0E2C4A'}">${k}${star}</div><div class="v">${v}</div></div>`;
+}).join("");
+</script>
+</body></html>
