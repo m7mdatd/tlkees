@@ -1,0 +1,16 @@
+/* ============================================================
+   منصة تلخيص — Global entry point
+   Mirrors project/styles.css. Imports tokens + fonts so the whole
+   app picks up the navy/turquoise + IBM Plex Sans Arabic system.
+   ============================================================ */
+
+@import "../styles/tokens/fonts.css";
+@import "../styles/tokens/colors.css";
+@import "../styles/tokens/typography.css";
+@import "../styles/tokens/spacing.css";
+@import "../styles/tokens/radii.css";
+@import "../styles/tokens/shadows.css";
+@import "../styles/tokens/base.css";
+
+html, body { height: 100%; }
+#__next, body { min-height: 100%; }

@@ -1,0 +1,23 @@
+{
+  "name": "talkhees",
+  "version": "1.0.0",
+  "private": true,
+  "description": "منصة تلخيص — Arabic summarization & rephrasing platform (Next.js + Firebase + Claude)",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.71.0",
+    "firebase": "^11.10.0",
+    "next": "^14.2.35",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.1",
+    "eslint-config-next": "^14.2.35"
+  }
+}

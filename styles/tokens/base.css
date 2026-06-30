@@ -1,0 +1,41 @@
+/* ============================================================
+   منصة تلخيص — Base layer
+   Minimal resets + Arabic-first, RTL document defaults.
+   ============================================================ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  color: var(--text-body);
+  background: var(--surface-page);
+  direction: rtl;
+  text-align: right;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6, p, figure { margin: 0; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--text-strong);
+  line-height: var(--lh-tight);
+  font-weight: var(--fw-bold);
+}
+
+a { color: var(--text-link); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+button { font-family: inherit; }
+
+code, kbd, pre, samp { font-family: var(--font-mono); }
+
+::selection { background: var(--teal-100); color: var(--navy-900); }
+
+:focus-visible { outline: none; box-shadow: var(--ring); }

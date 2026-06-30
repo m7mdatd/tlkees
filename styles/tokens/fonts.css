@@ -1,0 +1,8 @@
+/* ============================================================
+   منصة تلخيص — Fonts
+   IBM Plex Sans Arabic (UI + Arabic text) and IBM Plex Mono (numerals, code,
+   metadata). Loaded from the Google Fonts CDN. Replace these @font-face src
+   URLs with self-hosted .woff2 files if the brand requires offline assets.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');

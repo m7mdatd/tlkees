@@ -1,25 +1,77 @@
-# CODING AGENTS: READ THIS FIRST
+# منصة تلخيص — Talkhees
 
-This is a **handoff bundle** from Claude Design (claude.ai/design).
+منصة عربية (RTL) لتلخيص وإعادة صياغة النصوص والمخاطبات الرسمية، مع الحفاظ على النبرة الرسمية والمعنى الأصلي.
 
-A user mocked up designs in HTML/CSS/JS using an AI design tool, then exported this bundle so a coding agent can implement the designs for real.
+مبنية بـ **Next.js (App Router)** + **Firebase** (مصادقة + Firestore) + **Claude API** للتلخيص الفعلي، وجاهزة للنشر على **Vercel**.
+الهوية البصرية مأخوذة من نظام التصميم في مجلد `project/` (الكحلي + الفيروزي، خط IBM Plex Sans Arabic).
 
-## What you should do — IMPORTANT
+## الصفحات
 
-**Read the chat transcripts first.** There are 1 chat transcript(s) in `chats/`. The transcripts show the full back-and-forth between the user and the design assistant — they tell you **what the user actually wants** and **where they landed** after iterating. Don't skip them. The final HTML files are the output, but the chat is where the intent lives.
+| المسار | الوصف | الحماية |
+|--------|-------|---------|
+| `/` | صفحة الهبوط | عامة |
+| `/login` · `/register` | تسجيل الدخول / إنشاء حساب | عامة |
+| `/dashboard` | مساحة عضو: الرئيسية + أداة التلخيص + المكتبة | تتطلب تسجيل دخول |
+| `/admin` | لوحة المسؤول: مؤشرات + إدارة الأعضاء | تتطلب دور `admin` |
+| `/api/summarize` | نقطة نهاية التلخيص عبر Claude (خادمية) | — |
 
-**Read `project/ui_kits/app/site.html` in full.** The user had this file open when they triggered the handoff, so it's almost certainly the primary design they want built. Read it top to bottom — don't skim. Then **follow its imports**: open every file it pulls in (shared components, CSS, scripts) so you understand how the pieces fit together before you start implementing.
+## التشغيل محلياً
 
-**If anything is ambiguous, ask the user to confirm before you start implementing.** It's much cheaper to clarify scope up front than to build the wrong thing.
+```bash
+npm install
+cp .env.example .env.local   # ثم املأ القيم
+npm run dev                  # http://localhost:3000
+```
 
-## About the design files
+## متغيّرات البيئة
 
-The design medium is **HTML/CSS/JS** — these are prototypes, not production code. Your job is to **recreate them pixel-perfectly** in whatever technology makes sense for the target codebase (React, Vue, native, whatever fits). Match the visual output; don't copy the prototype's internal structure unless it happens to fit.
+انسخ `.env.example` إلى `.env.local` واملأ:
 
-**Don't render these files in a browser or take screenshots unless the user asks you to.** Everything you need — dimensions, colors, layout rules — is spelled out in the source. Read the HTML and CSS directly; a screenshot won't tell you anything they don't.
+- `ANTHROPIC_API_KEY` — مفتاح Claude من <https://console.anthropic.com> (يُستخدم في الخادم فقط).
+- `NEXT_PUBLIC_FIREBASE_*` — إعدادات تطبيق الويب من Firebase Console
+  (Project settings → General → Your apps → SDK setup and configuration).
 
-## Bundle contents
+## إعداد Firebase
 
-- `README.md` — this file
-- `chats/` — conversation transcripts (read these!)
-- `project/` — the `منصة تلخيص — Design System` project files (HTML prototypes, assets, components)
+1. أنشئ مشروعاً في <https://console.firebase.google.com>.
+2. **Authentication** → فعّل مزوّد **Email/Password**.
+3. **Firestore Database** → أنشئ قاعدة بيانات (Production mode).
+4. الصق محتوى `firestore.rules` في Firestore → **Rules** ثم انشره.
+5. **Project settings** → أضف تطبيق ويب وانسخ قيم `NEXT_PUBLIC_FIREBASE_*`.
+
+البنية في Firestore:
+- `users/{uid}` — `{ name, email, role, plan, summaryCount, createdAt }`
+- `summaries/{id}` — `{ userId, title, type, summary, points, wordCount, ratio, status, createdAt }`
+
+### ترقية مستخدم إلى مسؤول
+
+سجّل حساباً عادياً، ثم في Firestore Console افتح `users/{uid}` وغيّر `role` إلى `admin`.
+سيظهر زر **لوحة المسؤول** في رأس مساحة العمل وتُتاح `/admin`.
+
+## النشر على Vercel
+
+1. ادفع المشروع إلى GitHub (تم).
+2. في <https://vercel.com> → **Add New… → Project** واختر المستودع.
+3. سيكتشف Vercel إطار Next.js تلقائياً (لا حاجة لإعدادات بناء).
+4. في **Settings → Environment Variables** أضف كل متغيّرات `.env.example`
+   (`ANTHROPIC_API_KEY` + `NEXT_PUBLIC_FIREBASE_*`).
+5. **Deploy**. بعد النشر أضف نطاق Vercel إلى Firebase
+   (Authentication → Settings → **Authorized domains**).
+
+## بنية المشروع
+
+```
+app/                صفحات App Router + /api/summarize
+components/         Icon + ds.jsx (مكوّنات نظام التصميم) + screens/ + RequireAuth
+lib/               firebase, auth, summaries, users, format
+styles/tokens/     توكنات CSS (ألوان، خطوط، مسافات…) منسوخة من نظام التصميم
+firestore.rules    قواعد أمان Firestore
+project/           نظام التصميم الأصلي (HTML/JSX prototypes) — المرجع البصري
+DESIGN_HANDOFF.md  تعليمات تصدير Claude Design الأصلية
+```
+
+## ملاحظات
+
+- التلخيص حقيقي عبر نموذج `claude-opus-4-8` ويُحفظ في مكتبة العضو تلقائياً.
+- دون ضبط `NEXT_PUBLIC_FIREBASE_*` يعمل العرض لكن التسجيل/الحفظ معطّل (تظهر رسالة تنبيه).
+- صورة الأفاتار تستخدم `<img>` عمداً (أحرف أولى)، لذا تحذير `next/image` متوقع وغير مؤثّر.

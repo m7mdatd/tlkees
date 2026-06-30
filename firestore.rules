@@ -1,0 +1,40 @@
+rules_version = '2';
+
+// قواعد أمان Firestore لمنصة تلخيص.
+// انشرها عبر: firebase deploy --only firestore:rules
+// أو ألصقها في Firebase Console → Firestore Database → Rules.
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // ملفات الأعضاء: كل عضو يقرأ/يكتب ملفه، والمسؤول يقرأ الجميع.
+    match /users/{userId} {
+      allow read: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+      allow create: if isSignedIn() && request.auth.uid == userId;
+      // منع العضو من ترقية نفسه إلى admin
+      allow update: if isSignedIn() && request.auth.uid == userId
+                    && (!('role' in request.resource.data)
+                        || request.resource.data.role == resource.data.role);
+      allow update, delete: if isAdmin();
+    }
+
+    // الملخّصات: مملوكة للعضو الذي أنشأها.
+    match /summaries/{docId} {
+      allow read: if isSignedIn()
+                  && (resource.data.userId == request.auth.uid || isAdmin());
+      allow create: if isSignedIn()
+                    && request.resource.data.userId == request.auth.uid;
+      allow update, delete: if isSignedIn()
+                            && (resource.data.userId == request.auth.uid || isAdmin());
+    }
+  }
+}
