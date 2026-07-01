@@ -22,6 +22,7 @@ export default function LandingScreen() {
         padding: "0 32px", borderBottom: "1px solid var(--border-subtle)", background: "var(--surface-card)" }}>
         <Logo variant="full" size={22} />
         <div style={{ flex: 1 }} />
+        <Button variant="ghost" size="sm" onClick={() => router.push("/contact")}>تواصل معنا</Button>
         <Button variant="ghost" size="sm" onClick={onLogin}>تسجيل الدخول</Button>
         <Button variant="primary" size="sm" onClick={onRegister}>ابدأ مجاناً</Button>
       </header>
@@ -61,6 +62,9 @@ export default function LandingScreen() {
         display: "flex", alignItems: "center", gap: "12px", background: "var(--surface-card)" }}>
         <Logo variant="mark" size={18} />
         <span style={{ fontSize: "var(--fs-xs)", color: "var(--text-muted)" }}>© ٢٠٢٦ منصة تلخيص — جميع الحقوق محفوظة</span>
+        <div style={{ flex: 1 }} />
+        <button type="button" onClick={() => router.push("/contact")} style={{ border: "none", background: "transparent",
+          cursor: "pointer", font: "inherit", fontSize: "var(--fs-xs)", color: "var(--text-link)" }}>تواصل معنا</button>
       </footer>
     </div>
   );
